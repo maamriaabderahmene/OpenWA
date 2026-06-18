@@ -6,10 +6,13 @@
 import { PluginContext, PluginType, IEnginePlugin } from '../../../core/plugins';
 import { IWhatsAppEngine } from '../../../engine/interfaces/whatsapp-engine.interface';
 import { BaileysAdapter } from '../../../engine/adapters/baileys.adapter';
+import { BaileysMessageStore } from '../../../engine/types/baileys.types';
 
 export class BaileysPlugin implements IEnginePlugin {
   type = PluginType.ENGINE as const;
   private context?: PluginContext;
+
+  constructor(private readonly messageStore?: BaileysMessageStore) {}
 
   onLoad(context: PluginContext): Promise<void> {
     this.context = context;
@@ -43,6 +46,7 @@ export class BaileysPlugin implements IEnginePlugin {
       authDir,
       proxyUrl,
       proxyType,
+      messageStore: this.messageStore,
     });
   }
 

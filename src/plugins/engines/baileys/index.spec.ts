@@ -50,4 +50,11 @@ describe('BaileysPlugin.createEngine (opaque config)', () => {
   it('reports the baileys library name', () => {
     expect(new BaileysPlugin().getEngineLibrary().name).toBe('@whiskeysockets/baileys');
   });
+
+  it('passes the message store to the adapter', () => {
+    const store = { put: jest.fn(), getMessage: jest.fn(), clearSession: jest.fn() };
+    const plugin = new BaileysPlugin(store);
+    plugin.createEngine({ sessionId: 'sess-1' });
+    expect(BaileysAdapter).toHaveBeenCalledWith(expect.objectContaining({ sessionId: 'sess-1', messageStore: store }));
+  });
 });
