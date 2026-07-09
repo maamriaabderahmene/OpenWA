@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.13] - 2026-07-09
+
+### Added
+
+- **Dashboard search panel.** The Chats page now has a global search bar in its header — type to search messages across all sessions, see results with highlighted snippets in a dropdown, and click a result to jump to that message in its chat (with cross-session navigation and best-effort message scrolling). Includes a scope toggle (all sessions / current session), load-more pagination, and graceful error states (incl. "search unavailable" when search is disabled). The snippet renderer is XSS-safe (escape-then-highlight, never `dangerouslySetInnerHTML`). Search UI strings are localized across all 10 supported locales.
+- **SDK search resources.** The JavaScript, Python, PHP, and Java SDKs now expose a `search` resource mirroring `GET /api/search` — `client.search.search({ q, sessionId?, chatId?, … })` → `SearchResults`. Typed params and results match the backend contract exactly.
+
 ## [0.8.12] - 2026-07-08
 
 ### Fixed
